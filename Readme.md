@@ -69,3 +69,14 @@
 	    "message" : "Note Berhasil Diubah"
     }
     ```
+## Delete Note
+- URL : `localhost:8000/api/v1/notes?id={id}`
+- Method: `DELETE`
+- response 
+    ```json
+    {
+	    "code": 200,
+	    "status": "Success",
+	    "message" : "Note Berhasil Dihapus"
+    }
+    ```
