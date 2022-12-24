@@ -39,6 +39,10 @@ func write(w http.ResponseWriter, code int, message string, status string, data 
 	w.Write(resp)
 }
 
+func remove(slice []Note, s int) []Note {
+	return append(slice[:s], slice[s+1:]...)
+}
+
 func main() {
 
 	handler := http.NewServeMux()
@@ -126,6 +130,26 @@ func main() {
 			}
 
 			write(w, http.StatusCreated, "Note Berhasil Diubah", "Success", nil)
+			return
+		}
+
+		if r.Method == http.MethodDelete {
+			// get parameter dari url
+			pID := r.URL.Query().Get("id")
+			id, err := strconv.Atoi(pID)
+			if err != nil {
+				fmt.Println("error :", err)
+				write(w, http.StatusBadRequest, "salah parameter", "error", nil)
+				return
+			}
+
+			for i, oldNote := range notes {
+				if oldNote.ID == id {
+					notes = remove(notes, i)
+				}
+			}
+
+			write(w, http.StatusCreated, "Note Berhasil Dihapus", "Success", nil)
 			return
 		}
 
