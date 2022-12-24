@@ -84,13 +84,14 @@ func main() {
 		return
 	})
 
+	addr := fmt.Sprintf("%s:%s", baseURl, port)
 	server := &http.Server{
-		Addr:         fmt.Sprintf("%s:%s", baseURl, port),
+		Addr:         addr,
 		Handler:      handler,
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 10 * time.Second,
 	}
 
-	fmt.Printf("server run on -> %s:%s ", baseURl, port)
+	fmt.Printf("server run on -> %s ", addr)
 	server.ListenAndServe()
 }
