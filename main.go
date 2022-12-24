@@ -80,6 +80,11 @@ func main() {
 			return
 		}
 
+		if r.Method == http.MethodGet {
+			write(w, http.StatusOK, "Success get list notes", "Success", notes)
+			return
+		}
+
 		write(w, http.StatusMethodNotAllowed, "Method Not Allowed", "error", nil)
 		return
 	})
